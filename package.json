@@ -1,0 +1,37 @@
+{
+  "name": "gulp-apply-patch",
+  "version": "1.0.0",
+  "description": "Applies patches to files piped through it",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaa/gulp-apply-patch.git"
+  },
+  "keywords": [
+    "gulp",
+    "patch",
+    "diff",
+    "unified"
+  ],
+  "author": "Joakim Beijar [github.com/kaa]",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaa/gulp-apply-patch/issues"
+  },
+  "homepage": "https://github.com/kaa/gulp-apply-patch#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "mocha": "^3.0.2",
+    "vinyl-fs": "^2.4.3"
+  },
+  "dependencies": {
+    "diff": "^2.2.3",
+    "glob": "^7.0.5",
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.1"
+  }
+}
