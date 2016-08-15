@@ -15,7 +15,7 @@ module.exports = function (patches, opts) {
     patches = glob.sync(patches).map(fs.readFileSync);
   }
   patches.forEach(function(patch){
-    diff.parsePatch(patch.toString()).forEach(function(parsedPatch){
+    diff.parsePatch(patch.toString().replace("\r\n","\n")).forEach(function(parsedPatch){
       var srcName = parsedPatch.oldFileName;
       var list = patchLists[srcName] = patchLists[srcName] || [];
       list.push(parsedPatch);
