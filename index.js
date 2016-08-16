@@ -12,10 +12,14 @@ module.exports = function (patches, opts) {
   var patchLists = {};
   // Parse glob
   if(typeof(patches)==="string") {
-    patches = glob.sync(patches).map(fs.readFileSync);
+    patches = glob.sync(patches)
+      .map(fs.readFileSync);
   }
   patches.forEach(function(patch){
-    diff.parsePatch(patch.toString().replace("\r\n","\n")).forEach(function(parsedPatch){
+    patch = opts.replaceCRLF
+      ? patch.toString().replace(/\r\n/g,"\n")
+      : patch.toString();
+    diff.parsePatch(patch.toString()).forEach(function(parsedPatch){
       var srcName = parsedPatch.oldFileName;
       var list = patchLists[srcName] = patchLists[srcName] || [];
       list.push(parsedPatch);
@@ -45,8 +49,11 @@ module.exports = function (patches, opts) {
     var patchesForFile = patchLists[file.relative];
     if(patchesForFile!==undefined) {
       try {
+        var originalContents = opts.replaceCRLF
+          ? file.contents.toString().replace(/\r\n/g,"\n")
+          : file.contents.toString();
         file.contents = new Buffer(
-          patchesForFile.reduce(applyPatch, file.contents.toString())
+          patchesForFile.reduce(applyPatch, originalContents)
         );
       } catch (err) {
         this.emit('error', new gutil.PluginError(PLUGIN_NAME, err));
