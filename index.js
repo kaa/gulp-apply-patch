@@ -4,6 +4,7 @@ var through = require('through2');
 var glob = require('glob');
 var diff = require('diff');
 var fs = require('fs');
+var path = require('path');
 
 var PLUGIN_NAME = "gulp-apply-patch";
 
@@ -20,7 +21,7 @@ module.exports = function (patches, opts) {
       ? patch.toString().replace(/\r\n/g,"\n")
       : patch.toString();
     diff.parsePatch(patch.toString()).forEach(function(parsedPatch){
-      var srcName = parsedPatch.oldFileName;
+      var srcName = path.normalize(parsedPatch.oldFileName);
       var list = patchLists[srcName] = patchLists[srcName] || [];
       list.push(parsedPatch);
     });
