@@ -14,7 +14,7 @@ module.exports = function (patches, opts) {
   // Parse glob
   if(typeof(patches)==="string") {
     patches = glob.sync(patches)
-      .map(fs.readFileSync);
+      .map(function(t) { return fs.readFileSync(t) });
   }
   patches.forEach(function(patch){
     patch = opts.replaceCRLF
