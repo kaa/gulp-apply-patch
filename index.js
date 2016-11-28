@@ -53,7 +53,7 @@ module.exports = function (patches, opts) {
         var originalContents = opts.replaceCRLF
           ? file.contents.toString().replace(/\r\n/g,"\n")
           : file.contents.toString();
-        file.contents = new Buffer(
+        file.contents = Buffer.from(
           patchesForFile.reduce(applyPatch, originalContents)
         );
       } catch (err) {

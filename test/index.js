@@ -43,11 +43,11 @@ describe('gulp-apply-patch', function() {
                       "-jumps over the\r\n"+
                       "+runs over the\r\n"+
                       " lazy dog.\r\n";
-      var patcher = applyPatch([new Buffer(crlfPatch)],{ replaceCRLF: true });
+      var patcher = applyPatch([Buffer.from(crlfPatch)],{ replaceCRLF: true });
       patcher.write(new gutil.File({
         base: "",
         path: "folder/test.txt",
-        contents: Buffer(crlfInput)
+        contents: Buffer.from(crlfInput)
       }));
       patcher.once('data', function(file) {
         assert.equal(crlfOutput, file.contents.toString('utf8'));
@@ -58,11 +58,11 @@ describe('gulp-apply-patch', function() {
 
   describe('when names match', function() {
     it('should apply patch', function(done) {
-      var patcher = applyPatch([new Buffer(patch)]);
+      var patcher = applyPatch([Buffer.from(patch)]);
       patcher.write(new gutil.File({
         base: "",
         path: "folder/test.txt",
-        contents: Buffer(input)
+        contents: Buffer.from(input)
       }));
       patcher.once('data', function(file) {
         assert.equal(output, file.contents.toString('utf8'));
@@ -70,11 +70,11 @@ describe('gulp-apply-patch', function() {
       });
     });
     it('should apply many patches', function(done) {
-      var patcher = applyPatch([new Buffer(patch),new Buffer(chainedPatch)]);
+      var patcher = applyPatch([Buffer.from(patch), Buffer.from(chainedPatch)]);
       patcher.write(new gutil.File({
         base: "",
         path: "folder/test.txt",
-        contents: Buffer(input)
+        contents: Buffer.from(input)
       }));
       patcher.once('data', function(file) {
         assert.equal(chainedOutput, file.contents.toString('utf8'));
@@ -87,9 +87,9 @@ describe('gulp-apply-patch', function() {
     var fakeFile = new gutil.File({
       base: "",
       path: "folder/not_test.txt",
-      contents: Buffer(input)
+      contents: Buffer.from(input)
     });
-    var patcher = applyPatch([new Buffer(patch)]);
+    var patcher = applyPatch([Buffer.from(patch)]);
     patcher.write(fakeFile);
 
     it('should not apply patch', function(done) {
