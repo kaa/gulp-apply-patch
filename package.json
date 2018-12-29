@@ -29,7 +29,7 @@
     "vinyl-fs": "^2.4.3"
   },
   "dependencies": {
-    "diff": "^2.2.3",
+    "diff": "^3.5.0",
     "glob": "^7.0.5",
     "gulp-util": "^3.0.7",
     "through2": "^2.0.1"
