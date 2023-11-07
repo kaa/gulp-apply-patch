@@ -1,3 +1,6 @@
+> [!NOTE]
+> This project is no longer maintained
+
 # gulp-apply-patch
 
 Patch files using unified diffs as part of a gulp build process.
